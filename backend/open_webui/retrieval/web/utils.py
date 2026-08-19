@@ -61,7 +61,7 @@ from open_webui.env import (
     USER_AGENT,
 )
 from open_webui.retrieval.loaders.external_web import ExternalWebLoader
-from open_webui.retrieval.loaders.microsoft_web_iq import MicrosoftWebIQLoader
+from open_webui.retrieval.loaders.microsoft_web_iq import DEFAULT_MICROSOFT_WEB_IQ_API_BASE_URL, MicrosoftWebIQLoader
 from open_webui.retrieval.loaders.tavily import TavilyLoader
 from open_webui.retrieval.web.firecrawl import scrape_firecrawl_url
 from open_webui.utils.misc import is_host_allowed
@@ -564,6 +564,7 @@ class SafeMicrosoftWebIQLoader(BaseLoader, RateLimitMixin, URLProcessingMixin):
         self,
         web_paths: Union[str, List[str]],
         api_key: str,
+        api_base_url: str = DEFAULT_MICROSOFT_WEB_IQ_API_BASE_URL,
         language: str = 'en',
         verify_ssl: bool = True,
         trust_env: bool = False,
@@ -572,6 +573,7 @@ class SafeMicrosoftWebIQLoader(BaseLoader, RateLimitMixin, URLProcessingMixin):
         timeout: Optional[int] = None,
     ):
         self.web_paths = web_paths if isinstance(web_paths, list) else [web_paths]
+        self.api_base_url = api_base_url
         self.api_key = api_key
         self.language = language
         self.verify_ssl = verify_ssl
