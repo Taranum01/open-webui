@@ -1857,6 +1857,7 @@ async def chat_completion(
 generate_chat_completions = chat_completion
 generate_chat_completion = chat_completion
 
+
 @app.post('/api/v1/chats/{id}/messages/{message_id}/resolve')
 async def resolve_chat_message_tool_call(
     request: Request,

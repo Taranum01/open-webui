@@ -1394,11 +1394,7 @@ async def get_terminal_tools(
 
     context_id = terminal_context_id(connection, metadata, terminal_context)
     config = terminal_context_config(connection, terminal_context)
-    if (
-        isinstance(config, dict)
-        and config.get('context_id') in {'chat_id', 'automation_id'}
-        and not context_id
-    ):
+    if isinstance(config, dict) and config.get('context_id') in {'chat_id', 'automation_id'} and not context_id:
         raise RuntimeError(f"Terminal server '{terminal_id}' requires a saved {terminal_context} context")
     if context_id:
         headers[TERMINAL_CONTEXT_HEADER] = context_id
